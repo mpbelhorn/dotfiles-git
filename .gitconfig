@@ -1,0 +1,11 @@
+# This is Git's per-user configuration file.
+[user]
+    name = Matt Belhorn
+    email = belhornmp@ornl.gov
+[core]
+	excludesfile = ~/.gitignore
+	pager = vimpager
+[color]
+    ui = auto
+[alias]
+    update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"

@@ -1,11 +1,52 @@
-# This is Git's per-user configuration file.
 [user]
-    name = Matt Belhorn
-    email = belhornmp@ornl.gov
-[core]
-	excludesfile = ~/.gitignore
-	pager = vimpager
+  name = Matt Belhorn
+  email = belhornmp@ornl.gov
+
 [color]
-    ui = auto
+	ui = auto
+
 [alias]
-    update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
+  ls = log -15 --pretty=format:'%C(yellow)%h%Cred | %Creset%s%Cblue [%cn]%Cred%d' --decorate
+  update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
+  unstage = reset -q HEAD --
+  discard = checkout --
+  nevermind = !git reset --hard HEAD && git clean -d -f
+  uncommit = reset --mixed HEAD~
+  save = commit -m
+  invert = revert
+  last = log -1 HEAD --format=format:"%Cred%H"
+  summary = status -u -s
+  graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %s (%cN, %ar) %Cred%d' --date-order
+  history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
+  branchout = checkout -b
+  tags = tag
+  branches = branch -a
+  stashes = stash list
+  remotes = remote -v
+  prestage = diff -w --word-diff=color
+  precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
+  move = mv
+  remove = rm
+  unmerged = branch --no-merged
+  unstash = stash pop
+  what = show -w
+  untrack = rm -r --cached
+  rewrite = rebase -i
+  amend = commit --amend
+  back = checkout "-"
+  contributors = shortlog -s -n
+  filetrail = log --follow -p -w
+  mergetrail = log --ancestry-path --merges
+  unmerged = diff --name-only --diff-filter=U
+
+[blame]
+  date = relative
+
+[core]
+  editor = vim
+  precomposeunicode = true
+  excludesfile = /home/matt/.gitexcludes
+
+[merge]
+  conflictstyle = diff3
+
